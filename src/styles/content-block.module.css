@@ -1,0 +1,38 @@
+.container {
+    width: 100%;
+    min-height: 100vh;
+    background-image: linear-gradient(to top, rgba(26,40,120,0.70), rgba(10,143,196,0.70));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5vh 0 10vh 0;
+}
+
+.wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    max-width: 1024px;
+}
+
+.header {
+    font-size: 52px;
+    color: white;
+    margin: 0;
+}
+
+.descr {
+    color: white;
+    font-size: 20px;
+    line-height: 1.55;
+}
+
+.cards {
+    width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
