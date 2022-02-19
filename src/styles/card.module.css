@@ -8,7 +8,7 @@
   width: 170px;
 }
 
-.card:hover .cardInner {
+.done .cardInner {
   transform: rotateY(180deg);
 }
 
@@ -38,7 +38,8 @@
 }
 
 .cardBack {
-  background-color: #FFC81F;
+  /* background-color: #FFC81F; */
+  background-color: #1BB95E;
   color: white;
   transform: rotateY(180deg);
 }

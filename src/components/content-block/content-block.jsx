@@ -2,6 +2,7 @@ import React from "react";
 import s from "../../styles/content-block.module.css";
 import Card from "../card/card";
 import { wordsList } from "../wordsList";
+import CardsList from "./cardsList";
 
 const ContentBlock = ({ title, descr }) => {
     return (
@@ -10,9 +11,10 @@ const ContentBlock = ({ title, descr }) => {
                 <h2 className={s.header}>{title}</h2>
                 <p className={s.descr}>{descr}</p>
             </div>
-            <div className={s.cards}>
+            {/* <div className={s.cards}>
                 { wordsList.map(({eng, rus}) => <Card eng={eng} rus={rus}/>) }
-            </div>
+            </div> */}
+            <CardsList item={wordsList}/>
         </div>
     )
 };
