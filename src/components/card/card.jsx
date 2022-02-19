@@ -1,48 +1,64 @@
 import React, { Component } from 'react';
 import s from '../../styles/card.module.css';
+import { CheckSquareOutlined } from "@ant-design/icons";
+import classnames from "classnames";
 
 class Card extends React.Component {
     state = {
         done: false,
+        isRemembered: false,
     };
 
     // при нажатии карточка разворачивается
     handleCardClick = () => {
-        if (this.state.done === false) {
-            this.setState({
-                done: true, 
-            });
-        } else {
-            this.setState({
-                done: false,
-            })
-        }
+        this.setState(({ done }) => {
+            return {
+                done: !done
+            };
+        });
+    };
+
+    // при нажатии текст картички перечеркивается или наоборот
+    handleIsRememberClick = () => {
+        this.setState(({isRemembered}) => {
+            return {
+                isRemembered: !isRemembered
+            };
+        });
     };
 
     render() {
         const { eng, rus } = this.props;
-        const { done } = this.state;
+        const { done, isRemembered } = this.state;
 
-        const cardClass = [s.card];
-        
-        if (done) {
-            cardClass.push(s.done);
-        } else if (done === false && cardClass.includes("done")) {
-            cardClass = cardClass.filter(item => item !== "done");
-        }
+        // const cardClass = [s.card];
+
+        // if (done) {
+        //     cardClass.push(s.done);
+        // } else if (done === false && cardClass.includes("done")) {
+        //     cardClass = cardClass.filter(item => item !== "done");
+        // }
 
         return (
-            <div 
-                className={cardClass.join(" ")} 
-                onClick={this.handleCardClick}
-            >
-                <div className={s.cardInner}>
-                    <div className={s.cardFront}>
-                        { eng }
+            <div className={s.root}>
+                <div 
+                    className={ classnames(s.card, { 
+                        [s.done]: done,
+                        [s.isRemembered]: isRemembered,
+                    }) } 
+                    onClick={this.handleCardClick}
+                >
+                    <div className={s.cardInner}>
+                        <div className={s.cardFront}>
+                            { eng }
+                        </div>
+                        <div className={s.cardBack}>
+                            { rus }
+                        </div>
                     </div>
-                    <div className={s.cardBack}>
-                        { rus }
-                    </div>
+                </div>
+                <div className={s.icons}>
+                    <CheckSquareOutlined onClick={this.handleIsRememberClick}/>
                 </div>
             </div>
         )

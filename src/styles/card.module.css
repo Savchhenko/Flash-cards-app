@@ -1,3 +1,10 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 33%;
+}
+
 .card {
   font-size: 18px;
   text-align: center;
@@ -38,8 +45,24 @@
 }
 
 .cardBack {
-  /* background-color: #FFC81F; */
   background-color: #1BB95E;
   color: white;
   transform: rotateY(180deg);
+}
+
+.icons {
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.icons:hover {
+  color: lightgray;
+}
+
+.isRemembered .cardFront {
+  text-decoration: line-through;
+}
+
+.isRemembered .cardBack {
+  text-decoration: line-through;
 }

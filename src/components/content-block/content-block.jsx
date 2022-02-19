@@ -11,9 +11,6 @@ const ContentBlock = ({ title, descr }) => {
                 <h2 className={s.header}>{title}</h2>
                 <p className={s.descr}>{descr}</p>
             </div>
-            {/* <div className={s.cards}>
-                { wordsList.map(({eng, rus}) => <Card eng={eng} rus={rus}/>) }
-            </div> */}
             <CardsList item={wordsList}/>
         </div>
     )
