@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import s from '../../styles/card.module.css';
-import { CheckSquareOutlined } from "@ant-design/icons";
+import { CheckSquareOutlined, DeleteOutlined } from "@ant-design/icons";
 import classnames from "classnames";
 
 class Card extends React.Component {
@@ -27,17 +27,14 @@ class Card extends React.Component {
         });
     };
 
+    handleDeletedClick = () => {
+        console.log("1 level");
+        this.props.onDeleted();
+    }
+
     render() {
         const { eng, rus } = this.props;
         const { done, isRemembered } = this.state;
-
-        // const cardClass = [s.card];
-
-        // if (done) {
-        //     cardClass.push(s.done);
-        // } else if (done === false && cardClass.includes("done")) {
-        //     cardClass = cardClass.filter(item => item !== "done");
-        // }
 
         return (
             <div className={s.root}>
@@ -59,6 +56,9 @@ class Card extends React.Component {
                 </div>
                 <div className={s.icons}>
                     <CheckSquareOutlined onClick={this.handleIsRememberClick}/>
+                </div>
+                <div className={s.icons}>
+                    <DeleteOutlined onClick={this.handleDeletedClick}/>  
                 </div>
             </div>
         )

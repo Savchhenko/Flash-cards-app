@@ -6,7 +6,20 @@ import CardsList from "./cardsList";
 class ContentBlock extends Component {
     state = {
         wordsArr: wordsList,
-    }
+    };
+
+    handleDeletedItem = (id) => {
+        this.setState(({wordsArr}) => {
+            const index = wordsArr.findIndex(item => item.id === id); //местоположение карточки в массиве
+            console.log("index = ", index);
+            wordsArr.splice(index, 1);
+
+            return {
+                wordsArr: wordsArr,
+            }
+            // тут мы напрямую меняем стейт, так делать нельзя, менять нужно только копию
+        });
+    };
 
     render() {
         const { wordsArr } = this.state;
@@ -17,7 +30,10 @@ class ContentBlock extends Component {
                     <h2 className={s.header}>{this.props.title}</h2>
                     <p className={s.descr}>{this.props.descr}</p>
                 </div>
-                <CardsList item={wordsArr}/>
+                <CardsList 
+                    onDeletedItem={this.handleDeletedItem} 
+                    item={wordsArr}
+                />
             </div>
         )
     }
