@@ -6,8 +6,8 @@ const CardsList = ({item = []}) => {
     return (
         <div className={s.cards}>
             {
-                item.map(({ eng, rus }, index) => (
-                    <Card key={index} eng={eng} rus={rus} />
+                item.map(({ eng, rus, id }) => (
+                    <Card key={id} eng={eng} rus={rus} />
                 ))
             }
         </div>

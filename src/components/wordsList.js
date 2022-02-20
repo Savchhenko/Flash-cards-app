@@ -1,46 +1,57 @@
 export const wordsList = [
     {
         eng: "spouses",
-        rus: "супруги"
+        rus: "супруги",
+        id: 1
     },
     {
         eng: "footwear",
-        rus: "обувь"
+        rus: "обувь",
+        id: 2
     },
     {
         eng: "scales",
-        rus: "весы"
+        rus: "весы",
+        id: 3
     },
     {
         eng: "cash-desk",
-        rus: "касса"
+        rus: "касса",
+        id: 4
     },
     {
         eng: "shopping bag",
-        rus: "пакет"
+        rus: "пакет",
+        id: 5
     },
     {
         eng: "bar code",
-        rus: "штрих-код"
+        rus: "штрих-код",
+        id: 6
     },
     {
         eng: "retail price",
-        rus: "розничная цена"
+        rus: "розничная цена",
+        id: 7
     },
     {
         eng: "wholesale",
-        rus: "оптовый"
+        rus: "оптовый",
+        id: 8
     },
     {
         eng: "in bulk",
-        rus: "оптом"
+        rus: "оптом",
+        id: 9
     },
     {
         eng: "to bargain",
-        rus: "торговаться"
+        rus: "торговаться",
+        id: 10
     },
     {
         eng: "best before",
-        rus: "годен до"
+        rus: "годен до",
+        id: 11
     },
 ];
