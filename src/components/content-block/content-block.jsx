@@ -11,13 +11,15 @@ class ContentBlock extends Component {
     handleDeletedItem = (id) => {
         this.setState(({wordsArr}) => {
             const index = wordsArr.findIndex(item => item.id === id); //местоположение карточки в массиве
-            console.log("index = ", index);
-            wordsArr.splice(index, 1);
+            
+            const newWordsArr = [
+                ...wordsArr.slice(0, index),
+                ...wordsArr.slice(index + 1)
+            ];
 
             return {
-                wordsArr: wordsArr,
-            }
-            // тут мы напрямую меняем стейт, так делать нельзя, менять нужно только копию
+                wordsArr: newWordsArr,
+            };
         });
     };
 
