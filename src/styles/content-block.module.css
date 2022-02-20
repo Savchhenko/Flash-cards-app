@@ -36,3 +36,7 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+
+.form {
+    margin-bottom: 24px;
+}
