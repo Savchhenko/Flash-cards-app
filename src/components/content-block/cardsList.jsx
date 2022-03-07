@@ -10,6 +10,7 @@ class CardsList extends Component {
     state = {
         value: "",
         label: "",
+        isBusy: false,
     };
 
     handleInputChange = ({ target }) => {
@@ -18,21 +19,27 @@ class CardsList extends Component {
         });
     };
 
-    handleSubmitForm = async () => {
+    getTheWord = async () => {
+        const { value } = this.state;
         const getWord = await getTranslateWord(this.state.value);
         console.log("ouput of getWord: ", getWord); 
 
-        this.setState(({value}) => {
-            return {
-                label: value,
-                value: "",
-            };
+        this.setState({
+            label: `${value} - ${getWord.translate}`,
+            value: "",
+            isBusy: false,
         });
+    }
+
+    handleSubmitForm = async () => {
+        this.setState({
+            isBusy: true,
+        }, this.getTheWord)
     };
 
     render() {
         const { item = [], onDeletedItem } = this.props;
-        const { value, label } = this.state;
+        const { value, label, isBusy } = this.state;
 
         return (
             <>
@@ -45,6 +52,7 @@ class CardsList extends Component {
                         enterButton="Search"
                         size="large"
                         value={value}
+                        loading={isBusy}
                         onChange={this.handleInputChange}
                         onSearch={this.handleSubmitForm}
                     />
