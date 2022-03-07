@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Card from "../card/card";
 import s from "../../styles/content-block.module.css";
 import { Input } from 'antd';
+import getTranslateWord from "../../services/dictionary";
 
 const { Search } = Input;
 
@@ -11,14 +12,16 @@ class CardsList extends Component {
         label: "",
     };
 
-    handleInputChange = (e) => {
-        console.log(e.target.value);
+    handleInputChange = ({ target }) => {
         this.setState({ //передаем новое значение, поэтому тут объект
-            value: e.target.value,
+            value: target.value,
         });
     };
 
-    handleSubmitForm = () => {
+    handleSubmitForm = async () => {
+        const getWord = await getTranslateWord(this.state.value);
+        console.log("ouput of getWord: ", getWord); 
+
         this.setState(({value}) => {
             return {
                 label: value,

@@ -54,4 +54,9 @@ export const wordsList = [
         rus: "годен до",
         id: 11
     },
+    {
+        eng: "put up with",
+        rus: "мириться",
+        id: 12
+    },
 ];
