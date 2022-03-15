@@ -1,12 +1,18 @@
 import React, { Component } from "react";
 import { Layout, Form, Input, Button } from 'antd';
 import s from "./login.module.css";
+import { fire } from "../../services/firebase";
 
 const { Content } = Layout;
 
 class LoginPage extends Component {
-    onFinish = (values) => {
-        console.log("values finish ", values);
+    onFinish = ({email, password}) => {
+        fire
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then(res => {
+                console.log("res: ", res);
+            })
     };
 
     onFinishFailed = (errorMsg) => {
@@ -32,11 +38,11 @@ class LoginPage extends Component {
             >
                 <Form.Item
                     label="Никнейм"
-                    name="username"
+                    name="email"
                     rules={[
                     {
                         required: true,
-                        message: 'Пожалуйста, введите никнейм!',
+                        message: 'Пожалуйста, введите email!',
                     },
                     ]}
                 >
