@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { Spin } from 'antd';
 import HomePage from "./pages/home/home";
 import LoginPage from "./pages/login/login";
 import { fire } from "./services/firebase";
+import s from "./styles/index.module.css";
 
 class App extends Component {
     state = {
@@ -27,9 +29,13 @@ class App extends Component {
         const { user } = this.state;
 
         if (user === null) {
-            return null;
+            return (
+                <div className={s.loader_wrap}>
+                    <Spin size="large" />
+                </div>
+            );
         }
-        
+
         return (
           <>
               {user ? <HomePage /> : <LoginPage />}
