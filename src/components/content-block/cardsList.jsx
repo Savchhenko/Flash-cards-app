@@ -4,7 +4,7 @@ import s from "../../styles/content-block.module.css";
 import { Form, Input, Button } from 'antd';
 import getTranslateWord from "../../services/dictionary";
 
-const { Search } = Input;
+// const { Search } = Input;
 
 class CardsList extends Component {
     state = {
