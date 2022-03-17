@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Spin } from 'antd';
 import HomePage from "./pages/home/home";
 import LoginPage from "./pages/login/login";
-import { fire } from "./services/firebase";
+import FirebaseContext from "./context/firebaseContext";
 import s from "./styles/index.module.css";
 
 class App extends Component {
@@ -11,13 +11,16 @@ class App extends Component {
     };
 
     componentDidMount() {
-        fire.auth().onAuthStateChanged(user => {
-            console.log("user: ", user);
+        const { auth, setUserUid } = this.context;
+
+        auth.onAuthStateChanged(user => {
             if (user) {
+                setUserUid(user.uid);
                 this.setState({
                     user,
                 });
             } else {
+                setUserUid(null);
                 this.setState({
                     user: false,
                 });
@@ -43,5 +46,6 @@ class App extends Component {
         );
     }
 }
+App.contextType = FirebaseContext;
 
 export default App;

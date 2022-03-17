@@ -2,14 +2,15 @@ import React, { Component } from "react";
 import { Layout, Form, Input, Button } from 'antd';
 import s from "./login.module.css";
 import { fire } from "../../services/firebase";
+import FirebaseContext from "../../context/firebaseContext";
 
 const { Content } = Layout;
 
 class LoginPage extends Component {
     onFinish = ({email, password}) => {
-        fire
-            .auth()
-            .signInWithEmailAndPassword(email, password)
+        const { signWithEmail } = this.context;
+        
+        signWithEmail(email, password)  
             .then(res => {
                 console.log("res: ", res);
             })
@@ -37,7 +38,7 @@ class LoginPage extends Component {
                 autoComplete="off"
             >
                 <Form.Item
-                    label="Никнейм"
+                    label="Почта"
                     name="email"
                     rules={[
                     {
@@ -90,5 +91,6 @@ class LoginPage extends Component {
         );
     }
 }
+LoginPage.contextType = FirebaseContext;
 
 export default LoginPage;

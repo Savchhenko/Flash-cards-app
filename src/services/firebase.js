@@ -10,11 +10,26 @@ const firebaseConfig = {
     storageBucket: "flash-cards-68c66.appspot.com",
     messagingSenderId: "626798737774",
     appId: "1:626798737774:web:f0ff7cfd77aefcb044a97f"
-  };
+};
 
-firebase.initializeApp(firebaseConfig);
 
-export const fire = firebase;
-const database = fire.database();
+class Firebase {
+    constructor() {
+        firebase.initializeApp(firebaseConfig); 
+    
+        this.auth = firebase.auth();
+        this.database = firebase.database();
 
-export default database;
+        this.userUid = null;
+    }
+
+    setUserUid = (uid) => this.userUid = uid;
+
+    signWithEmail = (email, password) => {
+        this.auth.signInWithEmailAndPassword(email, password);
+    };
+
+    getUserCardsRef = () => this.database.ref(`/cards/${this.userUid}`); 
+}
+
+export default Firebase;

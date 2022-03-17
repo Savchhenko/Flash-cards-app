@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import s from "../../styles/content-block.module.css";
 import CardsList from "./cardsList";
-import database from "../../services/firebase";
+import FirebaseContext from "../../context/firebaseContext";
 
 class ContentBlock extends Component {
     state = {
         wordsArr: [],
     };
 
-    urlRequest = `/cards/${this.props.user.uid}`;
+    // urlRequest = `/cards/${this.props.user.uid}`;
 
     componentDidMount() {
-        database.ref(this.urlRequest).on("value", res => {
+        const { getUserCardsRef } = this.context;
+        getUserCardsRef().on("value", res => {
             this.setState({
                 wordsArr: res.val() || [],
             });
@@ -21,7 +22,7 @@ class ContentBlock extends Component {
     handleSubmitButton = ({eng, rus}) => {
         const { wordsArr } = this.state;
 
-        database.ref(this.urlRequest).set([...wordsArr, {
+        this.getUserCardsRef.set([...wordsArr, {
             id: +new Date(),
             eng,
             rus,
@@ -33,7 +34,7 @@ class ContentBlock extends Component {
         
         const newWordsArr = wordsArr.filter(item => item.id !== id);
 
-        database.ref(this.urlRequest).set(newWordsArr);
+        this.getUserCardsRef.set(newWordsArr);
     };
 
     render() {
@@ -54,5 +55,6 @@ class ContentBlock extends Component {
         )
     }
 }
+ContentBlock.contextType = FirebaseContext;
 
 export default ContentBlock;
