@@ -8,6 +8,26 @@ class ContentBlock extends Component {
         wordsArr: [],
     };
 
+    urlRequest = `/cards/${this.props.user.uid}`;
+
+    componentDidMount() {
+        database.ref(this.urlRequest).on("value", res => {
+            this.setState({
+                wordsArr: res.val() || [],
+            });
+        })
+    };
+
+    handleSubmitButton = ({eng, rus}) => {
+        const { wordsArr } = this.state;
+
+        database.ref(this.urlRequest).set([...wordsArr, {
+            id: +new Date(),
+            eng,
+            rus,
+        }]);
+    };
+
     handleDeletedItem = (id) => {
         this.setState(({wordsArr}) => {
             const index = wordsArr.findIndex(item => item.id === id); //местоположение карточки в массиве
@@ -17,28 +37,13 @@ class ContentBlock extends Component {
                 ...wordsArr.slice(index + 1)
             ];
 
+            database.ref(this.urlRequest).set(newWordsArr);
+
             return {
                 wordsArr: newWordsArr,
             };
         });
     };
-
-    componentDidMount() {
-        database.ref("/cards").once("value").then(res => {
-            this.setState({
-                wordsArr: res.val(),
-            });
-        })
-    }
-
-    setNewWord = () => {
-        const { wordsArr } = this.state;
-        database.ref("/cards").set([...wordsArr, {
-            id: +new Date(),
-            eng: "barefoot",
-            rus: "босиком"
-        }]);
-    }
 
     render() {
         const { wordsArr } = this.state;
@@ -51,7 +56,8 @@ class ContentBlock extends Component {
                 </div>
                 <CardsList 
                     onDeletedItem={this.handleDeletedItem} 
-                    item={wordsArr}
+                    onSubmit={this.handleSubmitButton} 
+                    items={wordsArr}
                 />
             </div>
         )

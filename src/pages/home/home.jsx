@@ -5,6 +5,8 @@ import HeaderBlock from '../../components/header-block/header-block';
 
 class HomePage extends Component {
     render() {
+        console.log("user id: ", this.props.user.uid);
+
         return (
             <>
               <HeaderBlock 
@@ -14,6 +16,7 @@ class HomePage extends Component {
               <ContentBlock 
                   title="Ваши карточки"
                   descr="Создавайте свои карточки, чтобы учить новые слова"
+                  user={this.props.user}
               />
               <FooterBlock />
           </>

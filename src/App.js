@@ -38,7 +38,7 @@ class App extends Component {
 
         return (
           <>
-              {user ? <HomePage /> : <LoginPage />}
+              {user ? <HomePage user={user}/> : <LoginPage />}
           </>
         );
     }

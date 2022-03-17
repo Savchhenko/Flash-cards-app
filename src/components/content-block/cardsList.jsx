@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Card from "../card/card";
 import s from "../../styles/content-block.module.css";
-import { Input } from 'antd';
+import { Form, Input, Button } from 'antd';
 import getTranslateWord from "../../services/dictionary";
 
 const { Search } = Input;
@@ -31,14 +31,49 @@ class CardsList extends Component {
         });
     }
 
-    handleSubmitForm = async () => {
+    handleSubmitForm = async (values) => {
+        const { onSubmit } = this.props;
+
+        onSubmit && onSubmit(values);
+
         this.setState({
             isBusy: true,
         }, this.getTheWord)
     };
 
+    renderWordForm = () => {
+        return (
+            <div className={s.form}>
+                <Form
+                    name="basic"
+                    layout="inline"
+                    onFinish={this.handleSubmitForm}
+                >
+                    <Form.Item
+                        label="English"
+                        name="eng"
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item
+                        label="Русский"
+                        name="rus"
+                    >
+                        <Input />
+                    </Form.Item>
+                    <Form.Item>
+                        <Button
+                            type="primary"
+                            htmlType="submit"
+                        >Добавить</Button>
+                    </Form.Item>
+                </Form>
+            </div>
+        );
+    }
+
     render() {
-        const { item = [], onDeletedItem } = this.props;
+        const { items = [], onDeletedItem } = this.props;
         const { value, label, isBusy } = this.state;
 
         return (
@@ -46,7 +81,7 @@ class CardsList extends Component {
                 <div>
                     { this.state.label }
                 </div>
-                <div className={s.form}>
+                {/* <div className={s.form}>
                     <Search
                         placeholder="Введите текст для поиска слова"
                         enterButton="Поиск"
@@ -56,10 +91,11 @@ class CardsList extends Component {
                         onChange={this.handleInputChange}
                         onSearch={this.handleSubmitForm}
                     />
-                </div>
+                </div> */}
+                { this.renderWordForm() }
                 <div className={s.cards}>
                     {
-                        item.map(({ eng, rus, id }) => (
+                        items.map(({ eng, rus, id }) => (
                             <Card onDeleted={() => {
                                     console.log("2 level");
                                     onDeletedItem(id);

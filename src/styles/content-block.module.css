@@ -1,5 +1,5 @@
 .container {
-    width: 100%;
+    width: auto;
     min-height: 100vh;
     background-image: linear-gradient(to top, rgba(26,40,120,0.70), rgba(10,143,196,0.70));
     display: flex;
@@ -39,5 +39,4 @@
 
 .form {
     margin-bottom: 24px;
-    width: 50%;
 }
