@@ -7,38 +7,38 @@ import getTranslateWord from "../../services/dictionary";
 // const { Search } = Input;
 
 class CardsList extends Component {
-    state = {
-        value: "",
-        label: "",
-        isBusy: false,
-    };
+    // state = {
+    //     value: "",
+    //     label: "",
+    //     isBusy: false,
+    // };
 
-    handleInputChange = ({ target }) => {
-        this.setState({ //передаем новое значение, поэтому тут объект
-            value: target.value,
-        });
-    };
+    // handleInputChange = ({ target }) => {
+    //     this.setState({ //передаем новое значение, поэтому тут объект
+    //         value: target.value,
+    //     });
+    // };
 
-    getTheWord = async () => {
-        const { value } = this.state;
-        const getWord = await getTranslateWord(this.state.value);
-        console.log("ouput of getWord: ", getWord); 
+    // getTheWord = async () => {
+    //     const { value } = this.state;
+    //     const getWord = await getTranslateWord(this.state.value);
+    //     console.log("ouput of getWord: ", getWord); 
 
-        this.setState({
-            label: `${value} - ${getWord.translate}`,
-            value: "",
-            isBusy: false,
-        });
-    }
+    //     this.setState({
+    //         label: `${value} - ${getWord.translate}`,
+    //         value: "",
+    //         isBusy: false,
+    //     });
+    // }
 
     handleSubmitForm = async (values) => {
         const { onSubmit } = this.props;
 
         onSubmit && onSubmit(values);
 
-        this.setState({
-            isBusy: true,
-        }, this.getTheWord)
+        // this.setState({
+        //     isBusy: true,
+        // }, this.getTheWord)
     };
 
     renderWordForm = () => {
@@ -74,13 +74,13 @@ class CardsList extends Component {
 
     render() {
         const { items = [], onDeletedItem } = this.props;
-        const { value, label, isBusy } = this.state;
+        // const { value, label, isBusy } = this.state;
 
         return (
             <>
-                <div>
+                {/* <div>
                     { this.state.label }
-                </div>
+                </div> */}
                 {/* <div className={s.form}>
                     <Search
                         placeholder="Введите текст для поиска слова"
